@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InnovaHack 2026 | January Tech Fest</title>
+    <style>
+      :root {
+        --bg: #081426;
+        --bg-soft: #101d34;
+        --card: #12233f;
+        --card-2: #0f1d2e;
+        --primary: #6ee7f9;
+        --secondary: #8b5cf6;
+        --accent: #f59e0b;
+        --text: #edf6ff;
+        --muted: #b9c9dd;
+        --line: rgba(255,255,255,0.12);
+        --success: #34d399;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(180deg, #071120 0%, #0c1c2f 100%);
+        color: var(--text);
+      }
+
+      img { max-width: 100%; display: block; }
+
+      a { color: inherit; text-decoration: none; }
+
+      .container {
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(12px);
+        background: rgba(8, 20, 38, 0.72);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 74px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .logo-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: #03111d;
+        font-weight: 900;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .nav-links a:hover { color: var(--text); }
+
+      .nav-btn {
+        background: linear-gradient(135deg, var(--primary), #7dd3fc);
+        color: #051726;
+        padding: 12px 20px;
+        border-radius: 999px;
+        font-weight: 800;
+      }
+
+      .hero {
+        padding: 80px 0 56px;
+        background:
+          radial-gradient(circle at top left, rgba(110, 231, 249, 0.18), transparent 22%),
+          radial-gradient(circle at right, rgba(139, 92, 246, 0.2), transparent 28%);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 32px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(110, 231, 249, 0.1);
+        border: 1px solid rgba(110, 231, 249, 0.18);
+        color: var(--primary);
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 22px 0 18px;
+        font-size: clamp(2.7rem, 5vw, 5rem);
+        line-height: 0.95;
+      }
+
+      .highlight {
+        color: var(--primary);
+      }
+
+      .hero p {
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.75;
+        max-width: 620px;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        padding: 16px 24px;
+        font-weight: 800;
+        border: 1px solid transparent;
+        transition: 0.2s ease;
+      }
+
+      .btn.primary {
+        background: linear-gradient(135deg, var(--primary), #7dd3fc);
+        color: #041a2b;
+      }
+
+      .btn.secondary {
+        border-color: var(--line);
+        background: rgba(255,255,255,0.02);
+        color: var(--text);
+      }
+
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin-top: 30px;
+      }
+
+      .meta-box {
+        min-width: 130px;
+        padding: 16px 18px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+      }
+
+      .meta-box strong {
+        display: block;
+        font-size: 1.3rem;
+        margin-bottom: 6px;
+      }
+
+      .meta-box span {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .hero-card {
+        padding: 22px;
+        background: linear-gradient(180deg, rgba(18,35,63,0.95), rgba(10,20,31,0.95));
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      }
+
+      .event-badge {
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(52,211,153,0.12);
+        border: 1px solid rgba(52,211,153,0.23);
+        color: var(--success);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .calendar {
+        margin-top: 22px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .month {
+        padding: 18px 22px;
+        background: linear-gradient(135deg, var(--secondary), #4f46e5);
+        color: white;
+        text-align: center;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .dates {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+        padding: 18px;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      .dates div {
+        padding: 10px 0;
+        border-radius: 10px;
+      }
+
+      .dates .active {
+        background: rgba(110, 231, 249, 0.14);
+        color: var(--text);
+        font-weight: 700;
+        border: 1px solid rgba(110, 231, 249, 0.28);
+      }
+
+      .section {
+        padding: 76px 0;
+      }
+
+      .section-header {
+        margin-bottom: 30px;
+      }
+
+      .section-header small {
+        color: var(--primary);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .section-header h2 {
+        margin: 12px 0 0;
+        font-size: clamp(2rem, 4vw, 3.1rem);
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .info-card {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 28px 22px;
+      }
+
+      .icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 18px;
+        font-size: 1.5rem;
+        background: linear-gradient(135deg, rgba(110,231,249,0.18), rgba(139,92,246,0.18));
+      }
+
+      .info-card h3 {
+        margin: 0 0 12px;
+        font-size: 1.4rem;
+      }
+
+      .info-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .registration-wrap {
+        display: grid;
+        grid-template-columns: 1fr 0.9fr;
+        gap: 24px;
+      }
+
+      .reg-panel, .form-panel {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 28px;
+      }
+
+      .detail-list {
+        list-style: none;
+        margin: 26px 0 0;
+        padding: 0;
+        display: grid;
+        gap: 18px;
+      }
+
+      .detail-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        color: var(--muted);
+      }
+
+      .detail-list strong {
+        display: block;
+        color: var(--text);
+        margin-bottom: 4px;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        margin-top: 8px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+      }
+
+      form {
+        display: grid;
+        gap: 18px;
+      }
+
+      .field-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      label {
+        display: block;
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+
+      input, select, textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        color: var(--text);
+        border-radius: 14px;
+        padding: 14px 15px;
+        font: inherit;
+      }
+
+      textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: rgba(110,231,249,0.7);
+        box-shadow: 0 0 0 3px rgba(110,231,249,0.12);
+      }
+
+      .prize-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .prize-card {
+        padding: 28px 22px;
+        border-radius: 22px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        text-align: center;
+      }
+
+      .prize-card.gold { border-color: rgba(245, 158, 11, 0.45); }
+      .prize-card.silver { border-color: rgba(148,163,184,0.45); }
+      .prize-card.bronze { border-color: rgba(251,146,60,0.45); }
+
+      .place {
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 0.74rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+      }
+
+      .gold .place { background: rgba(245,158,11,0.12); color: #fbbf24; }
+      .silver .place { background: rgba(148,163,184,0.12); color: #e2e8f0; }
+      .bronze .place { background: rgba(251,146,60,0.12); color: #fdba74; }
+
+      .prize-card h3 {
+        margin: 0 0 10px;
+        font-size: 2rem;
+      }
+
+      .prize-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .categories {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .category-item {
+        padding: 24px 20px;
+        border-radius: 20px;
+        background: linear-gradient(180deg, rgba(18,35,63,0.7), rgba(9,18,31,0.7));
+        border: 1px solid var(--line);
+      }
+
+      .category-item .tag {
+        display: inline-block;
+        margin-bottom: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(110,231,249,0.12);
+        color: var(--primary);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .category-item h4 {
+        margin: 0 0 10px;
+        font-size: 1.2rem;
+      }
+
+      .category-item p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      footer {
+        padding: 24px 0 50px;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+      }
+
+      .footer-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 900px) {
+        .hero-grid,
+        .registration-wrap,
+        .info-grid,
+        .prize-grid,
+        .categories {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-links {
+          display: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .field-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding-top: 60px;
+        }
+
+        .cta-row {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="logo">
+          <span class="logo-mark">H</span>
+          <span>InnovaHack</span>
+        </div>
+        <nav class="nav-links">
+          <a href="#about">About</a>
+          <a href="#register">Register</a>
+          <a href="#prizes">Prizes</a>
+          <a href="#categories">Categories</a>
+        </nav>
+        <a class="nav-btn" href="#register">Register Now</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow">January 2026 • Tech Innovation Arena</div>
+            <h1>Build bold ideas at <span class="highlight">InnovaHack</span></h1>
+            <p>
+              Join the biggest student hackathon of the month and collaborate with creators,
+              developers, and future founders to transform ideas into breakthrough digital solutions.
+            </p>
+
+            <div class="cta-row">
+              <a class="btn primary" href="#register">Register Your Team</a>
+              <a class="btn secondary" href="#categories">Explore Tracks</a>
+            </div>
+
+            <div class="hero-meta">
+              <div class="meta-box">
+                <strong>500+</strong>
+                <span>Participants</span>
+              </div>
+              <div class="meta-box">
+                <strong>40+</strong>
+                <span>Projects</span>
+              </div>
+              <div class="meta-box">
+                <strong>₹1.5L</strong>
+                <span>Prize Pool</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <span class="event-badge">Live Event</span>
+            <div class="calendar">
+              <div class="month">January</div>
+              <div class="dates">
+                <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                <div></div><div></div><div></div><div>1</div><div>2</div><div>3</div><div>4</div>
+                <div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div>
+                <div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div>
+                <div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div>24</div><div>25</div>
+                <div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div class="active">31</div><div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container">
+          <div class="section-header">
+            <small>Event Overview</small>
+            <h2>Build, compete, and innovate</h2>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-card">
+              <div class="icon">⚡</div>
+              <h3>24-Hour Challenge</h3>
+              <p>Spend a focused sprint solving real-world problems with mentorship, APIs, and peer support.</p>
+            </div>
+            <div class="info-card">
+              <div class="icon">🤝</div>
+              <h3>Team Collaboration</h3>
+              <p>Form teams across disciplines and prototype ideas that can turn into startups, products, and experiments.</p>
+            </div>
+            <div class="info-card">
+              <div class="icon">🎯</div>
+              <h3>Industry Mentors</h3>
+              <p>Learn from professionals in AI, cybersecurity, software engineering, product design, and business.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="register" class="section">
+        <div class="container">
+          <div class="section-header">
+            <small>Registration</small>
+            <h2>Secure your team slot</h2>
+          </div>
+
+          <div class="registration-wrap">
+            <div class="reg-panel">
+              <h3>Event Details</h3>
+              <ul class="detail-list">
+                <li>
+                  <span class="dot"></span>
+                  <div>
+                    <strong>Date</strong>
+                    January 31, 2026
+                  </div>
+                </li>
+                <li>
+                  <span class="dot"></span>
+                  <div>
+                    <strong>Venue</strong>
+                    Innovation Center, Tech City Campus
+                  </div>
+                </li>
+                <li>
+                  <span class="dot"></span>
+                  <div>
+                    <strong>Timings</strong>
+                    9:00 AM to 9:00 PM
+                  </div>
+                </li>
+                <li>
+                  <span class="dot"></span>
+                  <div>
+                    <strong>Team Size</strong>
+                    2 to 5 members per team
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="form-panel">
+              <form>
+                <div class="field-grid">
+                  <div>
+                    <label for="name">Full Name</label>
+                    <input id="name" type="text" placeholder="Your name" />
+                  </div>
+                  <div>
+                    <label for="email">Email</label>
+                    <input id="email" type="email" placeholder="name@email.com" />
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="college">College / University</label>
+                    <input id="college" type="text" placeholder="College name" />
+                  </div>
+                  <div>
+                    <label for="team">Team Name</label>
+                    <input id="team" type="text" placeholder="Your team name" />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="category">Project Category</label>
+                  <select id="category">
+                    <option>AI & ML</option>
+                    <option>Web Development</option>
+                    <option>Cybersecurity</option>
+                    <option>IoT & Robotics</option>
+                    <option>Healthcare</option>
+                    <option>FinTech</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="idea">Project Idea</label>
+                  <textarea id="idea" placeholder="Briefly describe your idea..."></textarea>
+                </div>
+
+                <button class="btn primary" type="submit">Submit Registration</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="prizes" class="section">
+        <div class="container">
+          <div class="section-header">
+            <small>Prize Pool</small>
+            <h2>Winning teams take home big rewards</h2>
+          </div>
+
+          <div class="prize-grid">
+            <div class="prize-card gold">
+              <span class="place">1st Place</span>
+              <h3>₹75,000</h3>
+              <p>Cash prize, incubation support, and mentoring opportunities.</p>
+            </div>
+            <div class="prize-card silver">
+              <span class="place">2nd Place</span>
+              <h3>₹45,000</h3>
+              <p>Cash reward plus startup pitch clinic and community recognition.</p>
+            </div>
+            <div class="prize-card bronze">
+              <span class="place">3rd Place</span>
+              <h3>₹25,000</h3>
+              <p>Prize money, technology credits, and expert feedback.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="categories" class="section">
+        <div class="container">
+          <div class="section-header">
+            <small>Project Categories</small>
+            <h2>Choose your challenge track</h2>
+          </div>
+
+          <div class="categories">
+            <div class="category-item">
+              <span class="tag">AI</span>
+              <h4>AI & ML</h4>
+              <p>Smart assistants, predictive analytics, recommendation systems, and generative AI prototypes.</p>
+            </div>
+            <div class="category-item">
+              <span class="tag">WEB</span>
+              <h4>Web Solutions</h4>
+              <p>Modern digital experiences, SaaS products, platforms, and scalable business applications.</p>
+            </div>
+            <div class="category-item">
+              <span class="tag">SEC</span>
+              <h4>Cybersecurity</h4>
+              <p>Threat detection, secure systems, privacy tools, and digital safety innovations.</p>
+            </div>
+            <div class="category-item">
+              <span class="tag">IOT</span>
+              <h4>IoT & Robotics</h4>
+              <p>Connected systems, automation, embedded intelligence, and smart physical solutions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-row">
+        <div>© 2026 Innovahack. All rights reserved.</div>
+        <div>January Event Registration • Tech City Campus</div>
+      </div>
+    </footer>
+
+    <script>
+      document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        alert('Registration submitted successfully! We will contact you with event details.');
+      });
+    </script>
+  </body>
+</html>
