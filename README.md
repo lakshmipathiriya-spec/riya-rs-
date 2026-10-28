@@ -1,1 +1,7 @@
-# riya-rs-
+echo "# riya-rs-" > README.md
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/lakshmipathiriya-spec/riya-rs-.git
+git push -u origin main# riya-rs-
